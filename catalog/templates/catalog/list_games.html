@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Catálogo de Juegos - Playirvnaye</title>
+    {% load static %} <!-- Cargar los archivos estáticos -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        body {
+            margin: 4cm;
+        }
+        #header {
+            background-color: #FF4500; /* Color rojo anaranjado */
+            border: 2px solid black; /* Marco negro */
+            padding: 10px;
+            text-align: center;
+            border-radius: 5px; /* Bordes redondeados */
+            color: white; /* Color del texto */
+            font-size: 36px; /* Aumentar el tamaño de la fuente */
+            font-weight: bold; /* Negrita */
+            width: fit-content; /* Ajustar el tamaño del contenedor */
+            margin-left: 10px; /* Separación a la izquierda */
+            margin-top: 10px; /* Separación desde la parte superior */
+            margin-bottom: 1.5cm; /* Separación de 1.5 cm hacia abajo */
+        }
+        #games-list-container {
+            border: 2px solid #ccc; /* Cuadro alrededor de los juegos */
+            padding: 10px;
+            border-radius: 5px; /* Bordes redondeados */
+            margin-top: 20px; /* Separación superior */
+        }
+        #games-list-container h2 {
+            text-align: center; /* Centrar el título dentro del recuadro */
+            margin-bottom: 20px; /* Espacio debajo del título */
+            font-size: 24px; /* Tamaño del título */
+            color: #FF4500; /* Color anaranjado para el título */
+        }
+        #games-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        #games-list li {
+            margin-bottom: 20px;
+        }
+        #games-list img {
+            width: 120px; /* Ajustar el ancho de las imágenes a 120px */
+            height: auto; /* Mantener la proporción de las imágenes */
+        }
+        #form-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Dos columnas iguales */
+            grid-gap: 10px; /* Espacio entre columnas */
+        }
+        #form-container label, #form-container input, #form-container select {
+            margin-bottom: 10px;
+        }
+        #search-genre-container {
+            display: flex; /* Usar flexbox para alinear buscar y género */
+            gap: 10px; /* Espacio entre los campos de búsqueda y género */
+        }
+        #price-container {
+            display: flex; /* Usar flexbox para alinear los elementos */
+            gap: 5px; /* Espacio reducido entre los campos de precio */
+        }
+        #price-container div {
+            flex: 1; /* Cada campo ocupará el mismo espacio */
+        }
+        button[type="submit"] {
+            background-color: #FF4500; /* Color anaranjado */
+            border: none; /* Sin borde */
+            color: white; /* Color del texto */
+            padding: 10px 20px; /* Espaciado del botón */
+            text-align: center; /* Centrar texto */
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px; /* Tamaño de la fuente */
+            margin-top: 10px; /* Espaciado superior */
+            border-radius: 20px; /* Bordes redondeados */
+            cursor: pointer; /* Manito de puntero */
+        }
+        button[type="submit"]:hover {
+            background-color: #e64400; /* Cambio de color al pasar el mouse */
+        }
+    </style>
+</head>
+<body>
+
+    <div id="header">Playirvnaye</div> <!-- Título en la parte superior izquierda -->
+
+    <form id="filter-form" method="get" action="{% url 'filter_games' %}">
+        <div id="form-container">
+            <div id="search-genre-container">
+                <div>
+                    <label for="search">Buscar juego por nombre:</label>
+                    <input type="text" id="search" name="search" placeholder="Ingrese el nombre del juego" value="{{ request.GET.search }}">
+                </div>
+
+                <div>
+                    <label for="genre">Género:</label>
+                    <input type="text" id="genre" name="genre" value="{{ request.GET.genre }}">
+                </div>
+            </div>
+
+            <div>
+                <label for="platform">Plataforma:</label>
+                <input type="text" id="platform" name="platform" value="{{ request.GET.platform }}">
+            </div>
+        </div>
+
+        <div id="price-container">
+            <div>
+                <label for="min_price">Precio Mínimo:</label>
+                <input type="number" id="min_price" name="min_price" step="0.01" placeholder="0.00">
+            </div>
+
+            <div>
+                <label for="max_price">Precio Máximo:</label>
+                <input type="number" id="max_price" name="max_price" step="0.01" placeholder="0.00">
+            </div>
+        </div>
+
+        <label for="order_by_price">Ordenar por precio:</label>
+        <select id="order_by_price" name="order_by_price">
+            <option value="">-- Seleccionar orden --</option>
+            <option value="asc">Precio: Bajo a Alto</option>
+            <option value="desc">Precio: Alto a Bajo</option>
+        </select>
+
+        <button type="submit">Filtrar</button> <!-- Botón con estilo anaranjado y bordes redondeados -->
+    </form>
+
+    <div id="games-list-container">
+        <h2>Catálogo de Juegos</h2> <!-- Título dentro del recuadro -->
+        <ul id="games-list">
+            {% for game in games %}
+            <li>
+                <a href="#" class="game-detail-link" data-game-id="{{ game.id }}">
+                    <img src="{{ game.image.url }}" alt="{{ game.name }}">
+                    <h2>{{ game.name }}</h2>
+                    <p>{{ game.genre }}</p>
+                    <p>{{ game.platform }}</p>
+                    <p>{{ game.price }} $</p>
+                </a>
+            </li>
+            {% empty %}
+            <p>No se encontraron juegos.</p>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div id="game-details-modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <img id="game-image" src="" alt="">
+            <h2 id="game-name"></h2>
+            <p id="game-description"></p>
+            <p><strong>Fecha de Lanzamiento:</strong> <span id="game-release-date"></span></p>
+            <p><strong>Reseñas:</strong></p>
+            <p id="game-reviews"></p>
+        </div>
+    </div>
+
+    <script src="{% static 'js/app.js' %}"></script>
+</body>
+</html>

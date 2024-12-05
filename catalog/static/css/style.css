@@ -1,0 +1,171 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 4cm; /* Margen general */
+    padding: 0;
+}
+
+/* Formulario de filtros */
+#filter-form {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+/* Contenedor de los juegos */
+#games-container {
+    border: 3px solid #333; /* Borde más grueso para resaltar el cuadro */
+    padding: 20px;
+    border-radius: 10px;
+    background-color: white; /* Fondo blanco para el cuadro */
+    margin-top: 20px;
+    position: relative;
+}
+
+/* Título del catálogo dentro del contenedor */
+#catalog-title {
+    text-align: center;
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 20px; /* Espacio entre el título y los juegos */
+}
+
+/* Lista de juegos */
+#games-list {
+    display: flex;
+    flex-wrap: wrap; /* Distribuir en varias filas */
+    justify-content: space-between; /* Espaciado entre juegos */
+    padding: 0;
+    list-style: none;
+}
+
+/* Tarjeta de cada juego */
+#games-list li {
+    flex-basis: 23%; /* Aproximadamente un cuarto del ancho */
+    margin: 10px;
+    border: 1px solid #ddd;
+    padding: 20px;
+    background-color: white;
+    text-align: center;
+    border-radius: 5px;
+    transition: transform 0.2s ease-in-out; /* Efecto de hover */
+}
+
+/* Imagen de cada juego */
+#games-list img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+/* Hover sobre la tarjeta */
+#games-list li:hover {
+    transform: scale(1.05); /* Pequeño zoom al pasar el ratón */
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    width: 80%;
+    max-width: 600px;
+    text-align: center;
+}
+
+/* Botón de cerrar */
+.modal .close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 30px;
+    cursor: pointer;
+}
+/* Estilos para agregar separación y cuadro distinguido */
+#games-container {
+    margin: 4cm auto; /* 4 cm de margen a los lados */
+    padding: 20px;
+    border: 2px solid #333; /* Color y grosor del borde */
+    border-radius: 10px; /* Esquinas redondeadas */
+    background-color: #f9f9f9; /* Fondo claro para diferenciar el cuadro */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para distinguir el cuadro */
+}
+
+#games-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+#games-list li {
+    list-style-type: none;
+    width: 200px; /* Ajusta el tamaño del cuadro del juego */
+    margin: 10px;
+    text-align: center;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+}
+
+#games-list li img {
+    max-width: 100%;
+    border-radius: 4px;
+}
+
+#games-list li h2 {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+#games-list li p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #666;
+}
+/* Formulario en dos columnas */
+#form-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Dos columnas iguales */
+    grid-gap: 20px; /* Espacio entre columnas */
+}
+
+/* Otros estilos */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 4cm; /* Margen general */
+    padding: 0;
+}
+
+#games-list {
+    display: flex;
+    flex-wrap: wrap; /* Distribuir en varias filas */
+    justify-content: space-between; /* Espaciado entre juegos */
+}
+
+#games-list li {
+    list-style-type: none;
+    width: 200px; /* Ajusta el tamaño del cuadro del juego */
+    margin: 10px;
+    text-align: center;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+}
+
+/* Otros estilos previos de hover y modal permanecen igual */
